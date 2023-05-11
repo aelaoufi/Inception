@@ -1,2 +1,4 @@
 FROM debian:buster
-WORKDIR .
+COPY . .
+RUN apt-get install NGINX \
+	
