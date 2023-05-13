@@ -1,7 +1,8 @@
 FROM	debian:buster
-RUN		sudo apt update && sudo apt install mariadb-server && sudo mysql_secure_installation
-COPY	cert.pem /etc/ssl/cert.pem
-COPY	key.pem /etc/ssl/key.pem
-COPY	config.conf /etc/nginx/conf.d
-EXPOSE	443
-CMD		["/usr/sbin/nginx", "-g", "daemon off;"]
+RUN 	apt-get update -y && apt-get upgrade -y
+RUN 	apt-get install -y mariadb-server
+COPY	./script.sh ./script.sh
+RUN		chmod +x script.sh
+EXPOSE	3306
+RUN		sh script.sh
+CMD 	["mysqld"]
