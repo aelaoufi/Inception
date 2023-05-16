@@ -1,11 +1,25 @@
--connect a USER
-	mariadb mysql -u root -p 
-		(-u users_name, -p password)
 
 -build the image
 	docker build . -t some_name  
-		(. current dir as build context, -t tag for image)
+		(. current dir as build context,
+			-t tag for image).
+
 
 -running the container
 	docker run -d -p port:port name
-		(-t detach mode container running in background, -p map container port and host port)
+		(-t detach mode container running in background,
+			-p map container port and host port).
+
+
+-access containers shell
+	docker exec -it ID bash
+		(-i interactive mode to interact with cont command line interface,
+			-t terminal,allocates a shell like interface).
+
+
+-connect a USER
+	mariadb mysql -u root -p 
+		(-u users_name,
+			-p password).
+
+-
