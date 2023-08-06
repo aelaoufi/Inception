@@ -5,15 +5,23 @@ RUN 	apt-get update && apt-get install -y php7.3 \
         nginx curl
 RUN     curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN     chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
+RUN     mkdir -p /run/php/
 
-COPY Wp_script.sh /Wp_script.sh
-COPY ./tools/www.conf /etc/php/7.3/fpm/pool.d/
+#to test with nginx
+RUN rm /etc/nginx/sites-enabled/default
+COPY nginx-config /etc/nginx/sites-available/default
+RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 
-RUN chmod +x Wp_script.sh
+# #COPY    Wp_script.sh /Wp_script.sh
+# #COPY ./tools/www.conf /etc/php/7.3/fpm/pool.d/
 
+# #RUN     chmod +x Wp_script.sh
 
-EXPOSE  9000
+EXPOSE  80
 
-ENTRYPOINT ["sh", "script.sh"]
+# #ENTRYPOINT ["sh", "Wp_script.sh"]
 
-CMD ["php-fpm7.3", "-R", "-F"]
+#to test with nginx
+CMD ["nginx", "-g", "daemon off;"]
+
+#CMD ["php-fpm7.3", "-R", "-F"]
