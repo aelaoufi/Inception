@@ -7,21 +7,14 @@ RUN     curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp
 RUN     chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
 RUN     mkdir -p /run/php/
 
-#to test with nginx
-RUN rm /etc/nginx/sites-enabled/default
-COPY nginx-config /etc/nginx/sites-available/default
-RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 
-# #COPY    Wp_script.sh /Wp_script.sh
-# #COPY ./tools/www.conf /etc/php/7.3/fpm/pool.d/
+COPY    ./tools/Wp_script.sh /Wp_script.sh
+COPY ./tools/www.conf /etc/php/7.3/fpm/pool.d/
 
-# #RUN     chmod +x Wp_script.sh
+RUN     chmod +x Wp_script.sh
 
-EXPOSE  80
+EXPOSE  9000
 
-# #ENTRYPOINT ["sh", "Wp_script.sh"]
+ENTRYPOINT ["sh", "Wp_script.sh"]
 
-#to test with nginx
-CMD ["nginx", "-g", "daemon off;"]
-
-#CMD ["php-fpm7.3", "-R", "-F"]
+CMD ["php-fpm7.3", "-R", "-F"]
