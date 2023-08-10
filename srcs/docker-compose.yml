@@ -3,6 +3,7 @@ version: '3'
 
 services:
   nginx:
+    container_name: nginx
     build: ./requirements/nginx
     ports:
       - 443:443
@@ -18,6 +19,7 @@ services:
 
 
   mariadb:
+    container_name: mariadb
     build: ./requirements/mariadb
     ports:
       - 3036:3036
@@ -36,6 +38,7 @@ services:
     init: true
 
   wordpress:
+    container_name: wordpress
     build: ./requirements/wordpress
     ports:
       - 9000:9000
@@ -68,12 +71,12 @@ volumes :
     driver: local
     driver_opts:
       type: none
-      device: /Users/aelaoufi/Desktop/volumes/wordpress
+      device: /Users/anass_elaoufi/Desktop/volumes/wordpress
       o: bind 
   mariadb:
     driver: local
     driver_opts:
       type: none
-      device: /Users/aelaoufi/Desktop/volumes/mariadb
+      device: /Users/anass_elaoufi/Desktop/volumes/mariadb
       o: bind
 

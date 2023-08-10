@@ -5,13 +5,13 @@ RUN 	apt-get update && apt-get install -y php7.3 \
         nginx curl
 RUN     curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN     chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
-RUN     mkdir -p /run/php/
 
 
 COPY    ./tools/Wp_script.sh /Wp_script.sh
 COPY    ./tools/www.conf /etc/php/7.3/fpm/pool.d/
 
 RUN     chmod +x Wp_script.sh
+RUN     mkdir -p /run/php/
 
 EXPOSE  9000
 
