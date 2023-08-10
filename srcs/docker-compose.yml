@@ -26,7 +26,7 @@ services:
     env_file:
       - .env
     environment:
-      - MYSQL_ROOT_PASSWOR=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
@@ -71,12 +71,12 @@ volumes :
     driver: local
     driver_opts:
       type: none
-      device: /Users/anass_elaoufi/Desktop/volumes/wordpress
+      device: /Users/aelaoufi/Desktop/volumes/wordpress
       o: bind 
   mariadb:
     driver: local
     driver_opts:
       type: none
-      device: /Users/anass_elaoufi/Desktop/volumes/mariadb
+      device: /Users/aelaoufi/Desktop/volumes/mariadb
       o: bind
 
