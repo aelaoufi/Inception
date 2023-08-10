@@ -6,12 +6,15 @@ services:
     build: ./requirements/nginx
     ports:
       - 443:443
+    networks:
+      - wordpress
+    depends_on:
+      - wordpress
     volumes:
       - wordpress:/var/www/html/wordpress
     env_file:
       - .env
-    depends_on:
-      - wordpress
+    init: true
 
 
   mariadb:
@@ -25,10 +28,12 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_LOWER_CASE_TABLE_NAMES=1
     networks:
       - wordpress
     volumes:
       - mariadb:/var/lib/mysql/
+    init: true
 
   wordpress:
     build: ./requirements/wordpress
@@ -38,6 +43,10 @@ services:
       - .env
     volumes:
       - wordpress:/var/www/html/wordpress
+    networks:
+      - wordpress
+    depends_on:
+      - mariadb
     environment:
       - MYSQL_ROOT_PASSWOR=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -47,8 +56,7 @@ services:
       - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
       - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
       - WORDPRESS_TABLE_PREFIX=${WORDPRESS_TABLE_PREFIX}
-    depends_on:
-      - mariadb
+    init: true
 
 
 networks:
@@ -60,12 +68,12 @@ volumes :
     driver: local
     driver_opts:
       type: none
-      device: /Users/anass_elaoufi/Desktop/volumes/wordpress
+      device: /Users/aelaoufi/Desktop/volumes/wordpress
       o: bind 
   mariadb:
     driver: local
     driver_opts:
       type: none
-      device: /Users/anass_elaoufi/Desktop/volumes/mariadb
+      device: /Users/aelaoufi/Desktop/volumes/mariadb
       o: bind
 
