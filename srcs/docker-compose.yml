@@ -71,12 +71,22 @@ volumes :
     driver: local
     driver_opts:
       type: none
-      device: /Users/aelaoufi/Desktop/volumes/wordpress
+      device: /Users/anass_elaoufi/Desktop/volumes/wordpress
       o: bind 
   mariadb:
     driver: local
     driver_opts:
       type: none
-      device: /Users/aelaoufi/Desktop/volumes/mariadb
+      device: /Users/anass_elaoufi/Desktop/volumes/mariadb
       o: bind
+
+# volumes :
+#   wordpress:
+#     type: bind
+#     source: /Users/anass_elaoufi/Desktop/volumes/wordpress
+#     target: /var/www/html/wordpress
+#   mariadb:
+#     type: bind
+#     source: /Users/anass_elaoufi/Desktop/volumes/mariadb
+#     target: /var/lib/mysql/
 
